@@ -43,6 +43,24 @@ Once you have pulled in the package:
 5. Prepare the billable model (typically the default Laravel User model):
 
     - Add the `Laravel\Cashier\Billable` trait.
+    - Add the taxtPercentage() function
+    ```php
+        namespace App\Models;
+
+        use Illuminate\Database\Eloquent\Model;
+        use Laravel\Cashier\Order\Contracts\ProvidesInvoiceInformation;
+        use Laravel\Cashier\Billable;
+
+        class TicketOrder extends Model
+        {
+            use Billable;
+
+            public function taxPercentage() {
+                return 0; //insert tax percentage logic
+            }	
+        ....	
+    
+    ```
 
     - Optionally, override the method `mollieCustomerFields()` to configure what billable model fields are stored while creating the Mollie Customer.
       Out of the box the `mollieCustomerFields()` method uses the default Laravel User model fields:
